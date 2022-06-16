@@ -15,11 +15,12 @@ export default function Project() {
         ))}
       </div>
       
-      <div className='text-center'>
-        <button className='my-4 uppercase font-semibold text-yellow-300 border border-zinc-600 py-2 px-4 rounded-md shadow-md
-         hover:border-zinc-700 active:bg-slate-700 active:text-slate-200'>
+      <div className='text-center mt-8'>
+        <a href="https://github.com/songvut365" target="_blank"
+          className='my-4 uppercase font-semibold text-yellow-300 border border-zinc-600 py-3 px-5 rounded-md shadow-md
+          hover:border-zinc-700 active:bg-neutral-800 active:text-zinc-200'>
           more projects
-        </button>
+        </a>
       </div>
     </div>
   )
