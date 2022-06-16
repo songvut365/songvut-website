@@ -7,7 +7,7 @@ import ProjectCard from './ProjectCard';
 export default function Project() {
   return (
     <div className='py-4'>
-      <h1 className='text-3xl font-semibold text-blue-500 mb-4'>PROJECTS</h1>
+      <h1 className='text-3xl font-semibold text-yellow-300 mb-4'>PROJECTS</h1>
 
       <div className='md:grid md:justify-center lg:grid-cols-2  gap-4'>
         {projects.map(project => (
@@ -16,8 +16,8 @@ export default function Project() {
       </div>
       
       <div className='text-center'>
-        <button className='my-4 uppercase font-semibold border border-gray-700 py-2 px-4 rounded-md shadow-lg
-        hover:text-slate-400 hover:border-slate-400 active:bg-slate-700 active:text-slate-200'>
+        <button className='my-4 uppercase font-semibold text-yellow-300 border border-zinc-600 py-2 px-4 rounded-md shadow-md
+         hover:border-zinc-700 active:bg-slate-700 active:text-slate-200'>
           more projects
         </button>
       </div>
