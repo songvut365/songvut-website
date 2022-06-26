@@ -1,15 +1,17 @@
 import React from 'react'
 import { skills } from '../data';
+import Fade from 'react-reveal/Fade';
 
 export default function Skills() {
   return (
     <div className='pb-2'>
+      <Fade>
       <h1 className='text-4xl font-semibold text-yellow-300'>SKILLS</h1>
 
       <div className="hs-accordion-group my-4" data-hs-accordion-always-open>
         { skills.map(skill => (
           <div className="hs-accordion border -mt-px first:rounded-t-lg last:rounded-b-lg bg-neutral-800  border-zinc-600" id="hs-bordered-heading-two" key={skill.name}>
-
+            <Fade>
             <button className="hs-accordion-toggle inline-flex items-center gap-x-3 w-full font-semibold text-left text-lg transition py-4 px-5  hs-accordion-active:text-yellow-500 text-white hover:text-zinc-400" aria-controls="hs-basic-bordered-collapse-two">
               {skill.name}
             </button>
@@ -39,11 +41,12 @@ export default function Skills() {
                 </div>
               </div>
             )}
+            </Fade>
           </div>
         ))}
         
       </div>
-        
+      </Fade>
     </div>
   )
 }

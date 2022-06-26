@@ -1,10 +1,11 @@
 import React from 'react'
-
+import Fade from 'react-reveal/Fade';
 import { education } from '../data';
 
 export default function Education() {
   return (
     <div className='py-4'>
+      <Fade>
       <h1 className='text-4xl font-semibold text-yellow-300 mb-4'>EDUCATION</h1>
 
       <div className='border rounded-lg border-zinc-600 bg-neutral-800 py-4 mb-2'>
@@ -23,6 +24,7 @@ export default function Education() {
           </div>
         ))}
       </div>
+      </Fade>
     </div>
   )
 }

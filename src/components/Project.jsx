@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Fade from 'react-reveal/Fade';
 import { projects } from '../data';
 
 import ProjectCard from './ProjectCard';
@@ -7,6 +7,8 @@ import ProjectCard from './ProjectCard';
 export default function Project() {
   return (
     <div className='py-4'>
+      <Fade>
+
       <h1 className='text-3xl font-semibold text-yellow-300 mb-4'>PROJECTS</h1>
 
       <div className='md:grid md:justify-center lg:grid-cols-2  gap-4'>
@@ -22,6 +24,7 @@ export default function Project() {
           more projects
         </a>
       </div>
+      </Fade>
     </div>
   )
 }
