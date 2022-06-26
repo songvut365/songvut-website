@@ -6,7 +6,5 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'preline/dist/hs-ui.bundle';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <App />
 )
