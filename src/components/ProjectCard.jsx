@@ -1,4 +1,5 @@
 import React from 'react'
+import Fade from 'react-reveal/Fade';
 
 export default function ProjectCard(props) {
   const project = props.project;
@@ -6,6 +7,8 @@ export default function ProjectCard(props) {
   return (
     <div className='max-w-md h-full bg-neutral-800 border border-zinc-600 rounded-lg mb-4
     flex flex-col justify-between pb-2'>
+      <Fade>
+
       <div>
         <img src={project.image} className="rounded-t-md w-full h-48 object-cover hover:cursor-pointer" />
         <div className='flex flex-col px-2 pt-2'>
@@ -21,6 +24,7 @@ export default function ProjectCard(props) {
           more details
         </a>
       </div>
+      </Fade>
     </div>
   )
 }
