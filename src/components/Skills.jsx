@@ -1,14 +1,40 @@
-import React from 'react'
-import { skills } from '../data';
+import React, { useEffect, useState } from 'react';
 import Fade from 'react-reveal/Fade';
 
+import { db } from '../main';
+import { doc, getDoc } from "firebase/firestore";
+
 export default function Skills() {
+  const [skills, setSkills] = useState([])
+
+  const getSkills = async () => {
+    const skillsRef = doc(db, 'information', 'skills');
+    const skillsDoc = await getDoc(skillsRef);
+    const data = skillsDoc.data();
+    setSkills(data.skills);
+  }
+
+  useEffect(() => {
+    getSkills();
+  }, []);
+
   return (
     <div className='pb-2'>
       <Fade>
       <h1 className='text-4xl font-semibold text-yellow-300'>SKILLS</h1>
 
-      <div className="hs-accordion-group my-4" data-hs-accordion-always-open>
+      {
+      skills.length === 0 
+      ? <div className='py-4'>
+      {Array(6).fill(0).map((value, index) => (
+        <div key={index} className='-mt-px first:rounded-t-lg last:rounded-b-lg h-16 px-4 border border-zinc-600'>
+          <ul className="mt-6 space-y-3 animate-pulse">
+            <li className="w-full h-3 bg-zinc-400 rounded-md" style={{width: "40%"}}></li>
+          </ul>
+        </div>
+      ))}
+      </div>
+      : <div className="hs-accordion-group my-4" data-hs-accordion-always-open>
         { skills.map(skill => (
           <div className="hs-accordion border -mt-px first:rounded-t-lg last:rounded-b-lg bg-neutral-800  border-zinc-600" id="hs-bordered-heading-two" key={skill.name}>
             <Fade>
@@ -46,6 +72,7 @@ export default function Skills() {
         ))}
         
       </div>
+      }
       </Fade>
     </div>
   )
