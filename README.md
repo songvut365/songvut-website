@@ -1,5 +1,9 @@
 # Songvut - Website
 
+## Screenshot
+
+![screenshot-1](document/screenshot-1.jpg)
+
 ## Run Development Mode
 
 In the project directory, you can run:

@@ -1,14 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import Fade from 'react-reveal/Fade';
-import { education } from '../data';
+
+import { db } from '../main';
+import { doc, getDoc } from "firebase/firestore";
 
 export default function Education() {
+  const [education, setEducation] = useState([])
+
+  const getEducation = async () => {
+    const educationRef = doc(db, 'information', 'education');
+    const educationDoc = await getDoc(educationRef);
+    const data = educationDoc.data();
+    setEducation(data.education);
+  }
+
+  useEffect(() => {
+    getEducation();
+  }, []);
+
   return (
     <div className='py-4'>
       <Fade>
       <h1 className='text-4xl font-semibold text-yellow-300 mb-4'>EDUCATION</h1>
 
-      <div className='border rounded-lg border-zinc-600 bg-neutral-800 py-4 mb-2'>
+      {education.length === 0
+      ? <div className='w-full my-4 px-6 pb-5 border rounded-lg border-zinc-600'>
+          <ul className="mt-5 space-y-3 animate-pulse">
+            <li className="h-3 bg-zinc-500 rounded-md" style={{width: '60%'}}></li>
+            <li className="h-3 bg-zinc-500 rounded-md" style={{width: '40%'}}></li>
+            <li className="h-3 bg-zinc-500 rounded-md" style={{width: '40%'}}></li>
+            <li className="h-3 bg-zinc-500 rounded-md" style={{width: '20%'}}></li>
+          </ul>
+
+          <ul className="mt-5 space-y-3 animate-pulse">
+            <li className="h-3 bg-zinc-500 rounded-md" style={{width: '60%'}}></li>
+            <li className="h-3 bg-zinc-500 rounded-md" style={{width: '40%'}}></li>
+            <li className="h-3 bg-zinc-500 rounded-md" style={{width: '40%'}}></li>
+            <li className="h-3 bg-zinc-500 rounded-md" style={{width: '20%'}}></li>
+          </ul>
+        </div>
+      : <div className='border rounded-lg border-zinc-600 bg-neutral-800 py-4 mb-2'>
         {education.map(e => (
           <div className='flex pr-2' key={e.name}> 
             <div className='pt-2 px-4 flex flex-col'>
@@ -24,6 +55,7 @@ export default function Education() {
           </div>
         ))}
       </div>
+      }
       </Fade>
     </div>
   )

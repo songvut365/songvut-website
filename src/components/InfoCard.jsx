@@ -1,30 +1,75 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import Fade from 'react-reveal/Fade';
-import { information } from '../data';
+
+import { db } from '../main';
+import { doc, getDoc } from "firebase/firestore";
+
 
 export default function InfoCard() {
+  const [information, setInformation] = useState({})
+
+  const getInformation = async () => {
+    const informationRef = doc(db, 'information', 'info');
+    const informationDoc = await getDoc(informationRef);
+    setInformation(informationDoc.data())
+  }
+
+  useEffect(() => {
+    getInformation();
+  }, []);
+  
   return (
     <div className='max-w-sm md:max-w-xs w-full h-fit object-cover rounded-lg shadow-lg bg-zinc-800 mb-4'>
       <Fade>
-      <img src={information.image} className='rounded-t-lg w-full h-96 object-cover hover:cursor-pointer' />
+      {!information.image 
+      ? <div className='animate-pulse h-96 bg-zinc-500'></div>
+      : <img src={information.image} className='rounded-t-lg w-full h-96 object-cover hover:cursor-pointer' />
+      }
       
       <div className='divide-y divide-zinc-600 px-3'>
-        <div className='py-4'>
+        {!information.name
+        ? <ul className="my-6 space-y-3 animate-pulse">
+            <li className="w-full h-5 bg-yellow-300 rounded-xl" style={{width: '85%'}}></li>
+            <li className="w-full h-4 bg-zinc-400 rounded-lg" style={{width: '70%'}}></li>
+          </ul>
+        : <div className='py-4'>
           <p className='text-2xl uppercase text-yellow-300 font-bold'>{information.name}</p>
           <p className='text-xl uppercase text-white font-semibold'>{information.position}</p>
         </div>
+        }
 
         <div className='py-4'>
           <p className='text-xl font-semibold pb-2 text-white'>Summary</p>
-          <p className='first-letter:pl-4'>{information.summary}</p>
+          {
+          !information.summary 
+          ? <ul className="mt-5 space-y-3 animate-pulse">
+              <li className="w-full h-3 bg-zinc-400 rounded-md"></li>
+              <li className="w-full h-3 bg-zinc-400 rounded-md"></li>
+              <li className="w-full h-3 bg-zinc-400 rounded-md"></li>
+              <li className="w-full h-3 bg-zinc-400 rounded-md"></li>
+            </ul>
+          : <p className='first-letter:pl-4'>{information.summary}</p>
+          }
         </div>
-
-        <div className='py-4'>
-          <p className='text-xl font-semibold pb-2 text-white'>Contact</p>
-          <p><i className="bi bi-envelope-fill mr-2"></i>{information.email}</p>
-          <p><i className="bi bi-telephone-fill mr-2"></i>{information.phone}</p>
-          <p><i className="bi bi-geo-alt-fill mr-2"></i>{information.address}</p>
-        </div>
+        
+        
+        {
+        !information.email 
+        ? <div className='py-4'>
+            <p className='text-xl font-semibold text-white'>Contact</p>
+            <ul className="mt-5 space-y-3 animate-pulse">
+              <li className="w-full h-3 bg-zinc-400 rounded-md"></li>
+              <li className="w-full h-3 bg-zinc-400 rounded-md"></li>
+              <li className="w-full h-3 bg-zinc-400 rounded-md"></li>
+            </ul>
+          </div>
+        : <div className='py-4'>
+            <p className='text-xl font-semibold pb-2 text-white'>Contact</p>
+            <p><i className="bi bi-envelope-fill mr-2"></i>{information.email}</p>
+            <p><i className="bi bi-telephone-fill mr-2"></i>{information.phone}</p>
+            <p><i className="bi bi-geo-alt-fill mr-2"></i>{information.address}</p>
+          </div>
+        }
 
         <div className='py-4 flex justify-center gap-7 text-3xl'>
           <a href={information.githubLink} target="_blank" className='hover:scale-125'>
